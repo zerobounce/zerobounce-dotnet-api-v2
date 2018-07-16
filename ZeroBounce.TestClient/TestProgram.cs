@@ -12,12 +12,7 @@ namespace Zerbounce.TestClient
             zeroBounceAPI.EmailToValidate = "Email Address To Validate";       
             zeroBounceAPI.ip_address =  "IP Address Where Email Registered From";
 
-            zeroBounceAPI.api_key = "8f828cf33aa04a4591a2de5e4ef6bce7";
-            zeroBounceAPI.EmailToValidate = "henry@gnail.com";
-            zeroBounceAPI.ip_address = "123.123.123.111";
-
-
-            zeroBounceAPI.ReadTimeOut = 100000; // "Any integer value in milliseconds;
+                 zeroBounceAPI.ReadTimeOut = 100000; // "Any integer value in milliseconds;
             zeroBounceAPI.RequestTimeOut = 100000; // "Any integer value in milliseconds;
 
             var apiProperties = zeroBounceAPI.ValidateEmail();
