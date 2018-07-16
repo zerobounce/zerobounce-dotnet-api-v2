@@ -22,7 +22,6 @@ namespace ZeroBounce.Models
         public string firstName { get; set; } //: email owner's first name if available
         public string lastName { get; set; } //: email owner's last name if available
         public string gender { get; set; } //: email owner's gender if available
-        public string location { get; set; } //: email owner's location if available
         public string country { get; set; } //: the country of the IP passed in
         public string region { get; set; } //: the region of the IP passed in
         public string city { get; set; } //: the city of the IP passed in
