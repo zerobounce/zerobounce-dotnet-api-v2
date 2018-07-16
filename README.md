@@ -1,8 +1,8 @@
-# zerobounce-dotnet-api
-This is a .Net wrapper class example for the ZeroBounce API.<br><br>
+# zerobounce-dotnet-api-v2
+This is a .net wrapper class example for the ZeroBounce API v2.<br><br>
 The <b><i>ValidateEmail</b></i> and <b><i>GetCredit</b></i> methods return objects from which you can retrieve properties that return the relevant information.<br>
 
-You can also easily consume and keep it updated within your Visual Studio Project with Nuget Package Manager:[ https://www.nuget.org/packages/ZeroBounceAPIWrapper/]( https://www.nuget.org/packages/ZeroBounceAPIWrapper/)
+You can also easily consume and keep it updated within your Visual Studio Project with Nuget Package Manager:[ https://www.nuget.org/packages/ZeroBounceAPIWrapperv2/]( https://www.nuget.org/packages/ZeroBounceAPIWrapperv2/)
 
 **Properties and possible values returned by:**
 1. <b><i>ValidateEmail</b></i> method
@@ -11,17 +11,21 @@ You can also easily consume and keep it updated within your Visual Studio Projec
 |:--- |:--- 
 address  | The email address you are validating. 
 status | Valid /Invalid /Catch-All /Unknown /Spamtrap /Abuse /DoNotMail 
-subStatus  |antispam_system /greylisted /mail_server_temporary_error /forcible_disconnect /mail_server_did_not_respond /timeout_exceeded /failed_smtp_connection /mailbox_quota_exceeded /exception_occurred /possible_traps /role_based /global_suppression /mailbox_not_found /no_dns_entries /failed_syntax_check /possible_typo /unroutable_ip_address /leading_period_removed /does_not_accept_mail
+sub_status  |antispam_system /greylisted /mail_server_temporary_error /forcible_disconnect /mail_server_did_not_respond /timeout_exceeded /failed_smtp_connection /mailbox_quota_exceeded /exception_occurred /possible_traps /role_based /global_suppression /mailbox_not_found /no_dns_entries /failed_syntax_check /possible_typo /unroutable_ip_address /leading_period_removed /does_not_accept_mail /role_based_catch_all /disposable /toxic
 account | The portion of the email address before the "@" symbol.
-domain | The portion of the email address after the "@" symbol
-disposable |[true/false] If the email domain is diposable, which are usually temporary email addresses.
-toxic |[true/false] These domains are known for abuse, spam, and bot created.
+domain_age_days | Age of the email domain in days or [null].
+did_you_mean | Suggestive Fix for an email typo.
+free_email | [true/false] If the email comes from a free provider.
+mx_found | [true/false] Does the domain have an MX record.
+smtp_provider | The SMTP Provider of the email or [null] (BETA).
 firstname | The first name of the owner of the email when available or [null].
 lastname  |The last name of the owner of the email when available or [null].
 gender |The gender of the owner of the email when available or [null].
-creation date |The creation date of the email when available or [null].
-location|The location of the owner of the email when available or [null].
-processedat |The UTC time the email was validated.
+country |The country the email signed up when ip address is provided or [null].
+region |The region the email signed up when ip address is provided or [null].
+city |The city the email signed up when ip address is provided or [null].
+zipcode |The zipcode the email signed up when ip address is provided or [null].
+processed_at |The UTC time the email was validated.
 
 2. <b><i>GetCredit</b></i> method
   
@@ -58,6 +62,7 @@ credits  | The number of credits left in account for email validation.
 + role_based@example.com
 + timeout_exceeded@example.com
 + unroutable_ip_address@example.com
++ free_email@example.com
 
 **You can this IP to test the GEO Location in the API.**
 
@@ -68,9 +73,9 @@ credits  | The number of credits left in account for email validation.
  var zeroBounceAPI = new ZeroBounce.ZeroBounceAPI();
 
 //set input parameters
-zeroBounceAPI.apiKey = "Your API Key"; //Required
-zeroBounceAPI.emailToValidate = "Email address your validating"; //Required
-zeroBounceAPI.ipAddress = "IP address the email signed up with"; //Optional
+zeroBounceAPI.api_key = "Your API Key"; //Required
+zeroBounceAPI.emailToValidate = "Email address you are validating"; //Required
+zeroBounceAPI.ip_address = "IP address the email signed up with"; //Optional
 
 //Depending on how you use the API, you might want it to time out faster, for example on a registration screen. 
 //Normally the API will return results very fast, but a small percentage of mail servers take
@@ -106,9 +111,9 @@ switch (apiProperties.status)
 Dim zeroBounceAPI = New ZeroBounce.ZeroBounceAPI
 
 'set input parameters
-zeroBounceAPI.apiKey = "Your API Key" 'Required 
-zeroBounceAPI.emailToValidate = "Email address your validating" 'Required
-zeroBounceAPI.ipAddress = "IP address the email signed up with" 'Optional
+zeroBounceAPI.api_key = "Your API Key" 'Required 
+zeroBounceAPI.emailToValidate = "Email address you are validating" 'Required
+zeroBounceAPI.ip_address = "IP address the email signed up with" 'Optional
 
 'Depending on how you use the API, you might want it to time out faster, for example on a registration screen. 
 'Normally the API will return results very fast, but a small percentage of mail servers 
