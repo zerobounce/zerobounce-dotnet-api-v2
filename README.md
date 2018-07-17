@@ -1,5 +1,9 @@
 # zerobounce-dotnet-api-v2
 This is a .net wrapper class example for the ZeroBounce API v2.<br><br>
+
+Upgrading from V1? Read This: https://github.com/zerobounce/zerobounce-dotnet-api-v2/blob/master/upgrading.md
+
+
 The <b><i>ValidateEmail</b></i> and <b><i>GetCredit</b></i> methods return objects from which you can retrieve properties that return the relevant information.<br>
 
 You can also easily consume and keep it updated within your Visual Studio Project with Nuget Package Manager:[ https://www.nuget.org/packages/ZeroBounceAPIWrapperv2/]( https://www.nuget.org/packages/ZeroBounceAPIWrapperv2/)
