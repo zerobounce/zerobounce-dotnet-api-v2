@@ -26,11 +26,11 @@ status | valid /invalid /catch-all /unknown /spamtrap /abuse /do_not_mail
 sub_status  |antispam_system /greylisted /mail_server_temporary_error /forcible_disconnect /mail_server_did_not_respond /timeout_exceeded /failed_smtp_connection /mailbox_quota_exceeded /exception_occurred /possible_traps /role_based /global_suppression /mailbox_not_found /no_dns_entries /failed_syntax_check /possible_typo /unroutable_ip_address /leading_period_removed /does_not_accept_mail /role_based_catch_all /disposable /toxic
 account | The portion of the email address before the "@" symbol.
 domain | The portion of the email address after the "@" symbol.
-did_you_mean | Suggestive Fix for an email typo.
+did_you_mean | Suggestive Fix for an email typo or [null]
 domain_age_days | Age of the email domain in days or [null].
 free_email | [true/false] If the email comes from a free provider.
 mx_found | [true/false] Does the domain have an MX record.
-mx_record | The preferred MX record of the domain
+mx_record | The preferred MX record of the domain or [null]
 smtp_provider | The SMTP Provider of the email or [null] (BETA).
 firstname | The first name of the owner of the email when available or [null].
 lastname  |The last name of the owner of the email when available or [null].
