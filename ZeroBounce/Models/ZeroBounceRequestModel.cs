@@ -24,5 +24,6 @@ namespace ZeroBounce.Models
         public string city { get; set; } //: the city of the IP passed in
         public string zipcode { get; set; } //: the zipcode of the IP passed in
         public string processed_at { get; set; } //: "UTC time email was validated"
+        public string error { get; set; } //: Error Message 
     }
 }
