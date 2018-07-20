@@ -40,7 +40,7 @@ region |The region the email signed up when ip address is provided or [null].
 city |The city the email signed up when ip address is provided or [null].
 zipcode |The zipcode the email signed up when ip address is provided or [null].
 processed_at |The UTC time the email was validated.
-error | Error message or null].
+error | Error message or [null].
 
 2. <b><i>GetCredit</b></i> method
   
