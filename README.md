@@ -144,9 +144,9 @@ Dim apiCredits = zeroBounceAPI.GetCredits
 
 'use the properties to make decisions on
 Select Case (apiProperties.status)
-    Case "Invalid"
+    Case "invalid"
         Console.WriteLine("invalid")
-    Case "Valid"
+    Case "valid"
         Console.WriteLine("valid")
     Case Else
         Console.WriteLine(apiProperties.status)
