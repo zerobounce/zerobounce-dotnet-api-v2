@@ -110,10 +110,10 @@ var apiCredits= zeroBounceAPI.GetCredits();
 switch (apiProperties.status)
   {
       case "Invalid":
-          Console.WriteLine("Invalid");
+          Console.WriteLine("invalid");
           break;
       case "Valid":
-          Console.WriteLine("Valid");
+          Console.WriteLine("valid");
           break;
       default:
           Console.WriteLine(apiProperties.status);
