@@ -79,24 +79,26 @@ namespace ZeroBounce
         }
         public ZeroBounceResultsModel ValidateEmail()
         {
+            var apiUrl = "";
+            var responseString = "";
+            var oResults = new ZeroBounceResultsModel();
+
+            try
+            {
+                apiUrl = "https://api.zerobounce.net/v2/validate?api_key=" + api_key + "&email=" + System.Net.WebUtility.UrlEncode(EmailToValidate) + "&ip_address=" + System.Net.WebUtility.UrlEncode(ip_address);
+
             // secure SSL / TLS channel for different .Net versions           
             ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls11;
             ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls12;
 
-            var apiUrl = "";
 
-            apiUrl = "https://api.zerobounce.net/v2/validate?api_key=" + api_key + "&email=" + System.Net.WebUtility.UrlEncode(EmailToValidate) + "&ip_address=" + System.Net.WebUtility.UrlEncode(ip_address);
-
-            var responseString = "";
-            var oResults = new ZeroBounceResultsModel();
             System.Net.HttpWebRequest request = (System.Net.HttpWebRequest)WebRequest.Create(apiUrl);
             request.Timeout = RequestTimeOut;
             request.Method = "GET";
             Console.WriteLine("Input APIKey: " + api_key);
           
             var serializer = new JavaScriptSerializer();
-            try
-            {
+          
                 using (WebResponse response = request.GetResponse())
                 {
                     response.GetResponseStream().ReadTimeout = ReadTimeOut;
@@ -111,46 +113,47 @@ namespace ZeroBounce
             {
                 if (ex.Message.Contains("The operation has timed out")) oResults.sub_status = "timeout_exceeded";
                 else oResults.sub_status = "exception_occurred";
-                oResults.status = "Unknown";
+                oResults.status = "unknown";
                 oResults.domain = EmailToValidate.Substring(EmailToValidate.IndexOf("@") + 1).ToLower();
                 oResults.account = EmailToValidate.Substring(0, EmailToValidate.IndexOf("@")).ToLower();
                 oResults.address = EmailToValidate.ToLower();
+                oResults.error = ex.Message;
             }
             return oResults;
         }
         public ZeroBounceCreditsModel GetCredits()
         {
-            // secure SSL / TLS channel for different .Net versions            
-            ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls11;
-            ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls12;
-
             var apiUrl = "https://api.zerobounce.net/v2/getcredits?api_key=" + api_key;
             var responseString = "";
             var oResults = new ZeroBounceCreditsModel();
-
-            System.Net.HttpWebRequest request = (System.Net.HttpWebRequest)WebRequest.Create(apiUrl);
-            request.Timeout = RequestTimeOut;
-            request.Method = "GET";           
-            Console.WriteLine("APIKey: " + api_key);
-
-            var serializer = new JavaScriptSerializer();
             try
             {
-                using (WebResponse response = request.GetResponse())
-                {
-                    response.GetResponseStream().ReadTimeout = ReadTimeOut;
-                    using (StreamReader ostream = new StreamReader(response.GetResponseStream()))
+                // secure SSL / TLS channel for different .Net versions            
+                ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls11;
+                ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls12;
+
+                System.Net.HttpWebRequest request = (System.Net.HttpWebRequest)WebRequest.Create(apiUrl);
+                request.Timeout = RequestTimeOut;
+                request.Method = "GET";           
+                Console.WriteLine("APIKey: " + api_key);
+
+                var serializer = new JavaScriptSerializer();
+           
+                    using (WebResponse response = request.GetResponse())
                     {
-                        responseString = ostream.ReadToEnd();
-                        oResults = serializer.Deserialize<ZeroBounceCreditsModel>(responseString);
+                        response.GetResponseStream().ReadTimeout = ReadTimeOut;
+                        using (StreamReader ostream = new StreamReader(response.GetResponseStream()))
+                        {
+                            responseString = ostream.ReadToEnd();
+                            oResults = serializer.Deserialize<ZeroBounceCreditsModel>(responseString);
+                        }
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                // Add Your Error Loggin
-            }
-            return oResults;
+                catch (Exception ex)
+                {
+                    // Add Your Error Logging
+                }
+                return oResults;
         }
     }
 }
